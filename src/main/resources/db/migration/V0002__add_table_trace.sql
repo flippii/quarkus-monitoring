@@ -1,0 +1,5 @@
+CREATE TABLE trace (
+	id UUID PRIMARY KEY,
+	type VARCHAR(100) NOT NULL,
+	occurred_at TIMESTAMP NOT NULL
+);

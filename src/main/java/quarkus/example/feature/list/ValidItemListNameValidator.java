@@ -1,0 +1,15 @@
+package quarkus.example.feature.list;
+
+import quarkus.example.library.ExceptionChecker;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class ValidItemListNameValidator implements ConstraintValidator<ValidItemListName, String> {
+
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        return ExceptionChecker.isValid(() -> new ItemListName(value));
+    }
+
+}
