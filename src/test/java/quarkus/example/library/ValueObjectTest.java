@@ -7,10 +7,10 @@ class ValueObjectTest {
 
     @Test
     void anIntegerValueObject() {
-        var one = new AnIntegerValueObject(1);
+        AnIntegerValueObject one = new AnIntegerValueObject(1);
         assertEquals(1, one.value());
 
-        var anotherOne = new AnIntegerValueObject(1);
+        AnIntegerValueObject anotherOne = new AnIntegerValueObject(1);
         assertTrue(one.sameAs(anotherOne));
         assertTrue(anotherOne.sameAs(one));
 
@@ -22,6 +22,7 @@ class ValueObjectTest {
         AnIntegerValueObject(Integer value) {
             super(value);
         }
+
     }
 
 }

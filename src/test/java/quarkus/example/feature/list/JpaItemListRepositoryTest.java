@@ -8,10 +8,14 @@ import quarkus.example.test.IntegrationTest;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 import static com.natpryce.makeiteasy.MakeItEasy.an;
 import static com.natpryce.makeiteasy.MakeItEasy.make;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static quarkus.example.feature.list.ItemListMaker.ItemList;
 
 @IntegrationTest
@@ -29,15 +33,15 @@ public class JpaItemListRepositoryTest {
 
     @Test
     public void notFoundId() {
-        var result = repository.findById(ItemListId.create());
-        assertTrue(result.isEmpty());
+        Optional<ItemList> result = repository.findById(ItemListId.create());
+        assertFalse(result.isPresent());
     }
 
     @Test
     public void add() {
-        var list = make(an(ItemList));
+        ItemList list = make(an(ItemList));
         repository.add(list);
-        var found = repository.findById(list.getId());
+        Optional<ItemList> found = repository.findById(list.getId());
         assertTrue(found.isPresent());
         assertTrue(list.getId().sameAs(found.get().getId()));
         assertTrue(list.getName().sameAs(found.get().getName()));
@@ -45,7 +49,7 @@ public class JpaItemListRepositoryTest {
 
     @Test
     public void listEmptyRepository() {
-        var items = repository.list();
+        List<ItemList> items = repository.list();
         assertTrue(items.isEmpty());
     }
 
@@ -53,7 +57,7 @@ public class JpaItemListRepositoryTest {
     public void listNotEmptyRepository() {
         repository.add(make(an(ItemList)));
         repository.add(make(an(ItemList)));
-        var items = repository.list();
+        List<ItemList> items = repository.list();
         assertEquals(2, items.size());
     }
 

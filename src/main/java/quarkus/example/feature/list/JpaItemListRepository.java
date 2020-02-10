@@ -31,7 +31,7 @@ class JpaItemListRepository implements ItemListRepository {
     }
 
     private static ItemList fromEntity(PanacheEntityBase panacheEntity) {
-        var entity = (ItemListEntity) panacheEntity;
+        ItemListEntity entity = (ItemListEntity) panacheEntity;
         return new ItemList(new ItemListId(entity.id), new ItemListName(entity.name));
     }
 

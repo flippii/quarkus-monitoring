@@ -11,7 +11,7 @@ public class ItemListName extends ValueObject<String> {
         super(value);
 
         Objects.requireNonNull(value, "Name cannot be null");
-        if (value.isBlank()) {
+        if ("".equals(value)) {
             throw new IllegalArgumentException("Name cannot be blank");
         }
 
